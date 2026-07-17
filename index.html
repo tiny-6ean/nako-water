@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>猫の飲水管理</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+  <h1>猫の飲水管理</h1>
+</header>
+
+<nav class="tabs">
+  <button data-tab="record">記録</button>
+  <button data-tab="dashboard">ダッシュボード</button>
+  <button data-tab="graph">グラフ</button>
+  <button data-tab="analysis">分析</button>
+  <button data-tab="settings">設定</button>
+</nav>
+
+<section id="record" class="tab-content">
+  <h2>記録</h2>
+
+  <label>猫を選ぶ</label>
+  <select id="catSelect"></select>
+
+  <label>飲水源</label>
+  <select id="sourceSelect"></select>
+
+  <label>計量写真（OCR）</label>
+  <input type="file" id="photoInput" accept="image/*">
+
+  <label>今日の総重量 (g)</label>
+  <input type="number" id="weightInput">
+
+  <label>蒸発補正 (g)</label>
+  <input type="number" id="evapInput">
+
+  <label>メモ</label>
+  <input type="text" id="memoInput">
+
+  <button id="saveBtn">記録する</button>
+
+  <div id="recordResult" class="result-box"></div>
+</section>
+
+<section id="dashboard" class="tab-content">
+  <h2>ダッシュボード</h2>
+
+  <div id="alertBox" class="alert-box"></div>
+
+  <div class="dash-item">
+    <h3>今日の飲水量</h3>
+    <div id="todayDrink"></div>
+  </div>
+
+  <div class="dash-item">
+    <h3>7日平均</h3>
+    <div id="avg7"></div>
+  </div>
+
+  <div class="dash-item">
+    <h3>給水器 / 食器の割合</h3>
+    <div id="ratioBox"></div>
+  </div>
+
+  <div class="dash-item">
+    <h3>メモ一覧</h3>
+    <div id="memoList"></div>
+  </div>
+</section>
+
+<section id="graph" class="tab-content">
+  <h2>グラフ</h2>
+
+  <label>猫を選ぶ</label>
+  <select id="graphCat"></select>
+
+  <label>飲水源</label>
+  <select id="graphSource"></select>
+
+  <label>期間</label>
+  <select id="graphRange">
+    <option value="7">7日</option>
+    <option value="14">14日</option>
+    <option value="30">30日</option>
+  </select>
+
+  <canvas id="drinkChart"></canvas>
+</section>
+
+<section id="analysis" class="tab-content">
+  <h2>分析</h2>
+
+  <div class="analysis-item">
+    <h3>月次レポート</h3>
+    <div id="monthlyReport"></div>
+  </div>
+
+  <div class="analysis-item">
+    <h3>飲水源ごとの傾向</h3>
+    <div id="sourceTrend"></div>
+  </div>
+
+  <div class="analysis-item">
+    <h3>多頭比較</h3>
+    <div id="catCompare"></div>
+  </div>
+</section>
+
+<section id="settings" class="tab-content">
+  <h2>設定</h2>
+
+  <h3>猫の登録</h3>
+  <input type="text" id="newCatName" placeholder="猫の名前">
+  <button id="addCatBtn">追加</button>
+  <div id="catList"></div>
+
+  <h3>飲水源の登録</h3>
+  <input type="text" id="newSourceName" placeholder="飲水源名">
+  <input type="number" id="newSourceEvap" placeholder="蒸発補正 (g)">
+  <button id="addSourceBtn">追加</button>
+  <div id="sourceList"></div>
+
+  <h3>データ管理</h3>
+  <button id="exportCSV">CSVエクスポート</button>
+  <button id="exportJSON">バックアップ(JSON)</button>
+  <input type="file" id="importJSON" accept="application/json">
+</section>
+
+<script src="js/app.js"></script>
+<script src="js/ocr.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/record.js"></script>
+<script src="js/analyze.js"></script>
+<script src="js/chart.js"></script>
+
+</body>
+</html>
