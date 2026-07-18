@@ -5,9 +5,14 @@ export function initRecord(settings) {
 
   const catSelect = document.getElementById("catSelect");
   const sourceSelect = document.getElementById("sourceSelect");
+
+  // ★ 総重量の単位を追加
   const weightInput = document.getElementById("weightInput");
+  const weightUnitSelect = document.getElementById("weightUnitSelect");
+
   const evapInput = document.getElementById("evapInput");
   const evapUnitSelect = document.getElementById("evapUnitSelect");
+
   const memoInput = document.getElementById("memoInput");
   const saveBtn = document.getElementById("saveBtn");
   const resultBox = document.getElementById("recordResult");
@@ -50,15 +55,19 @@ export function initRecord(settings) {
   evapUnitSelect.value = firstSource.unit;
 
   /* ------------------------------
-     記録処理（単位対応）
+     記録処理（総重量＋蒸発補正の単位対応）
   ------------------------------ */
   saveBtn.addEventListener("click", () => {
 
     const cat = catSelect.value;
     const source = sourceSelect.value;
+
     const weight = Number(weightInput.value);
+    const weightUnit = weightUnitSelect.value;   // ★ 総重量の単位
+
     const evap = Number(evapInput.value || 0);
-    const unit = evapUnitSelect.value;
+    const evapUnit = evapUnitSelect.value;       // ★ 蒸発補正の単位
+
     const memo = memoInput.value;
 
     if (!weight) {
@@ -71,33 +80,40 @@ export function initRecord(settings) {
     /* 前回の重量を取得 */
     const filtered = logs.filter(l => l.cat === cat && l.source === source);
     const prev = filtered.length ? filtered[filtered.length - 1].weight : null;
+
+    /* diff の単位は weightUnit と同じ */
     const diff = prev !== null ? weight - prev : null;
 
     /* ------------------------------
-       単位ごとの飲水量計算
+       飲水量計算（単位対応）
     ------------------------------ */
     let drink = null;
 
     if (diff !== null) {
-      if (unit === "g" || unit === "ml") {
+
+      // 総重量の単位が g / ml の場合 → diff はそのまま
+      if (evapUnit === "g" || evapUnit === "ml") {
         drink = diff - evap;
-      } else if (unit === "percent") {
+
+      // 蒸発補正が％の場合
+      } else if (evapUnit === "percent") {
         drink = diff - (diff * (evap / 100));
       }
     }
 
     /* ------------------------------
-       保存データ
+       保存データ（総重量の単位も保存）
     ------------------------------ */
     const entry = {
       cat,
       source,
       date: new Date().toLocaleDateString("ja-JP"),
       weight,
+      weightUnit,   // ★ 総重量の単位
       diff,
       drink,
       evap,
-      unit,
+      evapUnit,     // ★ 蒸発補正の単位
       memo
     };
 
@@ -109,7 +125,7 @@ export function initRecord(settings) {
     ------------------------------ */
     resultBox.textContent =
       `${entry.date} / ${entry.cat} / ${entry.source}：` +
-      `${entry.weight} g（差分 ${entry.diff ?? "-"} g / 飲水量 ${entry.drink ?? "-"} ${unit}）`;
+      `${entry.weight} ${entry.weightUnit}（差分 ${entry.diff ?? "-"} ${entry.weightUnit} / 飲水量 ${entry.drink ?? "-"} ${entry.weightUnit}）`;
 
     analyzeToday(logs, settings);
     updateDashboard(logs, settings);

@@ -33,11 +33,14 @@
   <label>計量写真（OCR）</label>
   <input type="file" id="photoInput" accept="image/*">
 
-  <label>今日の総重量</label>
-  <div style="display:flex; gap:8px; align-items:center;">
-    <input type="number" id="weightInput">
-    <span>g</span>
-  </div>
+<label>今日の総重量</label>
+<div style="display:flex; gap:8px; align-items:center;">
+  <input type="number" id="weightInput">
+  <select id="weightUnitSelect">
+    <option value="g">g</option>
+    <option value="ml">ml</option>
+  </select>
+</div>
 
 <label>蒸発補正</label>
 <div style="display:flex; gap:8px; align-items:center;">
