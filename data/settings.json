@@ -1,3 +1,7 @@
 {
-  "version": 1
+  "version": 1,
+  "sources": [
+    { "name": "水", "evap": 0 },
+    { "name": "ウェット", "evap": 5 }
+  ]
 }
