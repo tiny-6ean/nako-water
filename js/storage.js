@@ -1,84 +1,51 @@
-const LOG_KEY = "water_log";
+const SETTINGS_KEY = "settings";
+const CATS_KEY = "cats";
+const LOG_KEY = "logs";
 
+/* ------------------------------
+   設定（飲水源・蒸発補正・単位）
+------------------------------ */
+export function loadSettings() {
+  const raw = localStorage.getItem(SETTINGS_KEY);
+
+  if (!raw) {
+    // 初期設定（単位対応）
+    const defaultSettings = {
+      version: 1,
+      sources: [
+        { name: "水", evap: 0, unit: "g" },
+        { name: "ウェット", evap: 5, unit: "g" }
+      ]
+    };
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(defaultSettings));
+    return defaultSettings;
+  }
+
+  return JSON.parse(raw);
+}
+
+export function saveSettings(settings) {
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+}
+
+/* ------------------------------
+   猫
+------------------------------ */
+export function loadCats() {
+  return JSON.parse(localStorage.getItem(CATS_KEY) || "[]");
+}
+
+export function saveCats(cats) {
+  localStorage.setItem(CATS_KEY, JSON.stringify(cats));
+}
+
+/* ------------------------------
+   記録ログ
+------------------------------ */
 export function loadLog() {
   return JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
 }
 
-export function saveLog(data) {
-  localStorage.setItem(LOG_KEY, JSON.stringify(data));
-}
-
-export async function loadSettings() {
-  const res = await fetch("./data/settings.json");
-  const json = await res.json();
-  return json;
-}
-
-export function exportCSV() {
-  const logs = loadLog();
-  if (!logs.length) {
-    alert("データがありません");
-    return;
-  }
-
-  const header = [
-    "date", "cat", "source", "weight", "diff", "drink", "evap", "memo"
-  ];
-
-  const rows = logs.map(l => [
-    l.date, l.cat, l.source, l.weight, l.diff, l.drink, l.evap, l.memo
-  ]);
-
-  const csv = [header.join(","), ...rows.map(r => r.join(","))].join("\n");
-
-  const blob = new Blob([csv], { type: "text/csv" });
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "water_log.csv";
-  a.click();
-
-  URL.revokeObjectURL(url);
-}
-
-export function exportJSON() {
-  const logs = loadLog();
-  const blob = new Blob([JSON.stringify(logs, null, 2)], {
-    type: "application/json"
-  });
-
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "water_log_backup.json";
-  a.click();
-
-  URL.revokeObjectURL(url);
-}
-
-export function importJSON(file) {
-  const reader = new FileReader();
-
-  reader.onload = () => {
-    try {
-      const data = JSON.parse(reader.result);
-      saveLog(data);
-      alert("データを復元しました");
-    } catch {
-      alert("JSONファイルが不正です");
-    }
-  };
-
-  reader.readAsText(file);
-}
-
-const CAT_KEY = "cats";
-
-export function loadCats() {
-  return JSON.parse(localStorage.getItem(CAT_KEY) || "[]");
-}
-
-export function saveCats(data) {
-  localStorage.setItem(CAT_KEY, JSON.stringify(data));
+export function saveLog(logs) {
+  localStorage.setItem(LOG_KEY, JSON.stringify(logs));
 }
