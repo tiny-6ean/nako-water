@@ -1,6 +1,5 @@
 import { initOCR } from './ocr.js';
 import { initRecord } from './record.js';
-import { initAnalyze } from './analyze.js';
 import { initChart } from './chart.js';
 import { loadSettings } from './storage.js';
 
