@@ -1,4 +1,5 @@
 export function initChart(settings) {
+console.log("settings in chart:", settings);
   const graphCat = document.getElementById("graphCat");
   const graphSource = document.getElementById("graphSource");
   const graphRange = document.getElementById("graphRange");
