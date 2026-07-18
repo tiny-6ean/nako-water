@@ -34,6 +34,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   initOCR();
   initRecord(settings);
-  initAnalyze(settings);
   initChart(settings);
 });
