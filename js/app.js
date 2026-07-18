@@ -31,14 +31,47 @@ document.addEventListener("DOMContentLoaded", async () => {
   const settings = await loadSettings();
 
   initTabs();
-  initCatSettings();
   initOCR();
   initRecord(settings);
   initChart(settings);
+  initCatSettings();
 });
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/neko-water/service-worker.js");
+}
+
+import { loadCats, saveCats } from './storage.js';
+
+function initCatSettings() {
+  const newCatName = document.getElementById("newCatName");
+  const addCatBtn = document.getElementById("addCatBtn");
+  const catList = document.getElementById("catList");
+
+  function renderCats() {
+    const cats = loadCats();
+    catList.innerHTML = "";
+
+    cats.forEach(cat => {
+      const div = document.createElement("div");
+      div.textContent = cat.name;
+      catList.appendChild(div);
+    });
+  }
+
+  addCatBtn.addEventListener("click", () => {
+    const name = newCatName.value.trim();
+    if (!name) return;
+
+    const cats = loadCats();
+    cats.push({ name });
+    saveCats(cats);
+
+    newCatName.value = "";
+    renderCats();
+  });
+
+  renderCats();
 }
 
 import { loadCats, saveCats } from './storage.js';
