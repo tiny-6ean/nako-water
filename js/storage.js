@@ -72,3 +72,13 @@ export function importJSON(file) {
 
   reader.readAsText(file);
 }
+
+const CAT_KEY = "cats";
+
+export function loadCats() {
+  return JSON.parse(localStorage.getItem(CAT_KEY) || "[]");
+}
+
+export function saveCats(data) {
+  localStorage.setItem(CAT_KEY, JSON.stringify(data));
+}
