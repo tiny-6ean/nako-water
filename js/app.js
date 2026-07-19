@@ -4,7 +4,7 @@ import { initChart } from './chart.js';
 import { initCatCompare } from './chart-compare.js';
 import { initTotalChart } from './chart-total.js';
 import { initSpotTotalChart } from './chart-spot-total.js';
-import { initHybridChart } from './chart-hybrid.js';   // ★ ハイブリッド分析を追加
+import { initHybridChart } from './chart-hybrid.js';
 import { loadSettings, saveSettings, loadCats, saveCats } from './storage.js';
 
 /* ------------------------------
@@ -193,6 +193,38 @@ function initWetSettings(settings) {
 }
 
 /* ------------------------------
+   異常検知の閾値設定
+------------------------------ */
+function initThresholdSettings(settings) {
+  const upInput = document.getElementById("thresholdUpInput");
+  const downInput = document.getElementById("thresholdDownInput");
+  const saveBtn = document.getElementById("saveThresholdBtn");
+
+  // 初期値がなければ作成
+  if (!settings.threshold) {
+    settings.threshold = { up: 40, down: -40 };
+    saveSettings(settings);
+  }
+
+  // UI に反映
+  upInput.value = settings.threshold.up;
+  downInput.value = settings.threshold.down;
+
+  saveBtn.addEventListener("click", () => {
+    const up = Number(upInput.value);
+    const down = Number(downInput.value);
+
+    if (isNaN(up) || isNaN(down)) return;
+
+    settings.threshold.up = up;
+    settings.threshold.down = down;
+    saveSettings(settings);
+
+    alert("閾値を保存しました");
+  });
+}
+
+/* ------------------------------
    DOMContentLoaded
 ------------------------------ */
 document.addEventListener("DOMContentLoaded", async () => {
@@ -206,11 +238,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   initSpotSettings(settings);
   initSourceSettings(settings);
   initWetSettings(settings);
+  initThresholdSettings(settings);   // ★ 閾値設定を追加
 
   initCatCompare(settings);      // 多頭比較
   initTotalChart(settings);      // 家庭総量
   initSpotTotalChart(settings);  // スポット別家庭総量
-  initHybridChart(settings);     // ★ 家庭 × 個体 ハイブリッド分析（完全版）
+  initHybridChart(settings);     // ハイブリッド分析（閾値反映）
 });
 
 /* ------------------------------
