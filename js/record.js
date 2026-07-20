@@ -2,6 +2,7 @@ import { saveLog, loadLog, loadCats } from './storage.js';
 import { analyzeToday, updateDashboard } from './analyze.js';
 
 export function initRecord(settings) {
+  const recordDate = document.getElementById("recordDate");
 
   const catSelect = document.getElementById("catSelect");
   const spotSelect = document.getElementById("spotSelect");
@@ -143,7 +144,7 @@ export function initRecord(settings) {
       cat,
       spot: spotName,
       method: spot.method,
-      date: new Date().toLocaleDateString("ja-JP"),
+      date: recordDate.value,
 
       value: currentValue,
       unit,
