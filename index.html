@@ -22,19 +22,110 @@
 </nav>
 
 <section id="record" class="tab-content">
-  <!-- 既存そのまま -->
+  <h2>記録</h2>
+
+  <label>猫を選ぶ</label>
+  <select id="catSelect"></select>
+
+  <label>スポット</label>
+  <select id="spotSelect"></select>
+
+  <div id="measureWeightBlock">
+    <label>重量（g）</label>
+    <input type="number" id="weightInput">
+  </div>
+
+  <div id="measureVolumeBlock">
+    <label>容量（ml）</label>
+    <input type="number" id="volumeInput">
+  </div>
+
+  <label>蒸発補正</label>
+  <input type="number" id="evapInput">
+  <select id="evapUnitSelect">
+    <option value="g">g</option>
+    <option value="ml">ml</option>
+    <option value="percent">％</option>
+  </select>
+
+  <h3>ウェット</h3>
+  <select id="wetProductSelect"></select>
+  <input type="number" id="wetAmountInput">
+  <input type="number" id="wetAddWaterInput">
+
+  <label>メモ</label>
+  <input type="text" id="memoInput">
+
+  <button id="saveBtn">保存</button>
+
+  <div id="recordResult"></div>
 </section>
 
 <section id="dashboard" class="tab-content">
-  <!-- 既存そのまま -->
+  <h2>ダッシュボード</h2>
+
+  <div class="dash-block">
+    <h3>今日の総飲水量</h3>
+    <div id="dashTotalToday">-</div>
+  </div>
+
+  <div class="dash-block">
+    <h3>スポット別飲水量</h3>
+    <div id="dashSpotList"></div>
+  </div>
+
+  <div class="dash-block">
+    <h3>ウェット水分量</h3>
+    <div id="dashWetToday">-</div>
+  </div>
 </section>
 
 <section id="graph" class="tab-content">
-  <!-- 既存そのまま -->
+  <h2>グラフ</h2>
+
+  <div class="graph-block">
+    <h3>日別飲水量（ml）</h3>
+    <canvas id="graphDaily"></canvas>
+  </div>
+
+  <div class="graph-block">
+    <h3>スポット別飲水量（ml）</h3>
+    <canvas id="graphSpot"></canvas>
+  </div>
+
+  <div class="graph-block">
+    <h3>ウェット水分量（ml）</h3>
+    <canvas id="graphWet"></canvas>
+  </div>
 </section>
 
 <section id="analysis" class="tab-content">
-  <!-- 既存そのまま（家庭総量・スポット総量・ハイブリッド分析） -->
+  <h2>分析</h2>
+
+  <div class="analysis-block">
+    <h3>今日の総飲水量</h3>
+    <div id="todayDrink">-</div>
+  </div>
+
+  <div class="analysis-block">
+    <h3>7日平均</h3>
+    <div id="avg7">-</div>
+  </div>
+
+  <div class="analysis-block">
+    <h3>スポット別割合</h3>
+    <div id="ratioBox">-</div>
+  </div>
+
+  <div class="analysis-block">
+    <h3>異常検知</h3>
+    <div id="alertBox"></div>
+  </div>
+
+  <div class="analysis-block">
+    <h3>メモ一覧（最新10件）</h3>
+    <div id="memoList"></div>
+  </div>
 </section>
 
 <!-- ▼▼▼ 異常点ポップアップ（完全版） ▼▼▼ -->
