@@ -1,4 +1,4 @@
-export function analyzeToday(logs, settings) {
+export function analyzeToday(logs, settings, targetDate) {
   const alertBox = document.getElementById("alertBox");
   const todayDrink = document.getElementById("todayDrink");
   const avg7 = document.getElementById("avg7");
@@ -93,8 +93,8 @@ export function calcSpotRatio(logs, settings) {
     .join(" / ");
 }
 
-export function updateDashboard(logs, settings) {
-  analyzeToday(logs, settings);
+export function updateDashboard(logs, settings, targetDate) {
+  analyzeToday(logs, settings, targetDate);
 }
 
 export function generateMonthlyReport(logs, settings) {
