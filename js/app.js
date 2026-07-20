@@ -186,10 +186,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   initDashboardAlerts(settings);
 });
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/neko-water/service-worker.js");
-}
-
 document.addEventListener("click", e => {
   if (!e.target.classList.contains("help-icon")) return;
 
