@@ -83,20 +83,20 @@
 <section id="graph" class="tab-content">
   <h2>グラフ</h2>
 
-  <div class="graph-block">
-    <h3>日別飲水量（ml）</h3>
-    <canvas id="graphDaily"></canvas>
-  </div>
+  <label>猫</label>
+  <select id="graphCat"></select>
 
-  <div class="graph-block">
-    <h3>スポット別飲水量（ml）</h3>
-    <canvas id="graphSpot"></canvas>
-  </div>
+  <label>スポット</label>
+  <select id="graphSpot"></select>
 
-  <div class="graph-block">
-    <h3>ウェット水分量（ml）</h3>
-    <canvas id="graphWet"></canvas>
-  </div>
+  <label>表示範囲（日数）</label>
+  <select id="graphRange">
+    <option value="7">7日</option>
+    <option value="14">14日</option>
+    <option value="30">30日</option>
+  </select>
+
+  <canvas id="drinkChart" width="600" height="300"></canvas>
 </section>
 
 <section id="analysis" class="tab-content">
