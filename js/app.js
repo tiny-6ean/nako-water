@@ -242,7 +242,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   initSpotSettings(settings);
   initWetSettings(settings);
   initThresholdSettings(settings);
-  initSpotTotalChart(settings);
   initHybridChart(settings);
 
   initDashboardAlerts(settings);   // ★ ダッシュボード異常警告カード
