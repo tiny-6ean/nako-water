@@ -162,3 +162,38 @@ canvas {
   border: 1px solid #e5e5e5;
   margin-top: 20px;
 }
+
+.settings-help {
+  font-size: 12px;
+  color: #666;
+  margin: 4px 0 0 0;
+  padding: 0;
+}
+
+.settings-help summary {
+  cursor: pointer;
+  font-size: 12px;
+  color: #999;
+  list-style: none;
+}
+
+.settings-help summary::-webkit-details-marker {
+  display: none;
+}
+
+.settings-help summary::before {
+  content: "？";
+  font-weight: bold;
+  margin-right: 4px;
+  color: #bbb;
+}
+
+.settings-help[open] summary::before {
+  content: "▼";
+  color: #bbb;
+}
+
+.settings-help p {
+  margin: 4px 0 0 16px;
+  padding: 0;
+}
