@@ -1,3 +1,13 @@
+const LOG_KEY = "logs";
+
+export function loadLog() {
+  return JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
+}
+
+export function saveLog(logs) {
+  localStorage.setItem(LOG_KEY, JSON.stringify(logs));
+}
+
 const CATS_KEY = "cats";
 
 export function loadCats() {
