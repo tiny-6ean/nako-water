@@ -7,9 +7,8 @@ export function analyzeToday(logs, settings) {
 
   if (!logs.length) return;
 
-  const today = new Date().toLocaleDateString("ja-JP");
+  const todayLogs = logs.filter(l => l.date === targetDate);
 
-  const todayLogs = logs.filter(l => l.date === today);
   const todayTotal = todayLogs
     .map(l => l.finalDrink || 0)
     .reduce((a, b) => a + b, 0);
