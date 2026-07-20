@@ -64,7 +64,7 @@ export function initRecord(settings) {
   });
 
   const firstSpot = settings.spots[0];
-  if (firstSpot.method === "weight") {
+  if (firstSpot && firstSpot.method === "weight") {
     measureWeightBlock.style.display = "block";
     measureVolumeBlock.style.display = "none";
   } else {
@@ -79,12 +79,9 @@ export function initRecord(settings) {
     const cat = catSelect.value;
     const spotName = spotSelect.value;
     const spot = settings.spots.find(s => s.name === spotName);
-
     const evap = Number(evapInput.value || 0);
     const evapUnit = evapUnitSelect.value;
-
     const memo = memoInput.value;
-
     const wetProduct = wetProductSelect.value;
     const wetAmount = Number(wetAmountInput.value || 0);
     const wetAddWater = Number(wetAddWaterInput.value || 0);
