@@ -35,16 +35,17 @@ export function initRecord(settings) {
       div.textContent =
         `${entry.date} / ${entry.cat} / ${entry.spot}：${entry.finalDrink.toFixed(1)}ml`;
 
-      const editBtn = document.createElement("button");
-      editBtn.textContent = "編集";
-      editBtn.onclick = () => loadLogForEdit(index);
-      div.appendChild(editBtn);
+const editBtn = document.createElement("button");
+editBtn.textContent = "編集";
+editBtn.className = "record-btn";
+editBtn.onclick = () => loadLogForEdit(index);
+div.appendChild(editBtn);
 
-      const delBtn = document.createElement("button");
-      delBtn.textContent = "削除";
-      delBtn.style.marginLeft = "8px";
-      delBtn.onclick = () => deleteLog(index);
-      div.appendChild(delBtn);
+const delBtn = document.createElement("button");
+delBtn.textContent = "削除";
+delBtn.className = "record-btn";
+delBtn.onclick = () => deleteLog(index);
+div.appendChild(delBtn);
 
       resultBox.appendChild(div);
     });
