@@ -211,13 +211,35 @@ function renderRecordList() {
 
   records.forEach((rec, index) => {
     const div = document.createElement("div");
-    div.textContent = `${rec.date} / ${rec.cat} / ${rec.spot} / ${rec.amount}ml`;
-    const btn = document.createElement("button");
-    btn.textContent = "編集";
-    btn.onclick = () => loadRecordForEdit(index);
-    div.appendChild(btn);
+    div.textContent = `${rec.date} / ${rec.cat} / ${rec.spot} / ${rec.amount || rec.volume || rec.weight || "-"} ml`;
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "編集";
+    editBtn.onclick = () => loadRecordForEdit(index);
+    div.appendChild(editBtn);
+
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "削除";
+    delBtn.style.marginLeft = "8px";
+    delBtn.onclick = () => deleteRecord(index);
+    div.appendChild(delBtn);
+
     box.appendChild(div);
   });
+}
+
+function deleteRecord(index) {
+  const records = JSON.parse(localStorage.getItem("records") || "[]");
+
+  if (editingIndex === index) {
+    editingIndex = null;
+    document.getElementById("saveBtn").textContent = "保存";
+    document.getElementById("editStatus").textContent = "";
+  }
+
+  records.splice(index, 1);
+  localStorage.setItem("records", JSON.stringify(records));
+  renderRecordList();
 }
 
 let editingIndex = null;
