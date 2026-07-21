@@ -175,18 +175,6 @@ canvas {
   margin-bottom: 8px;
 }
 
-.help-tip {
-  position: fixed;
-  background: #fff;
-  border: 1px solid #ddd;
-  padding: 6px 8px;
-  font-size: 12px;
-  color: #555;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  z-index: 9999;
-}
-
 .record-btn {
   display: inline-block;
   font-size: 12px;
@@ -195,11 +183,6 @@ canvas {
   width: auto;
 }
 
-#photoInput {
-  width: auto;
-  padding: 4px;
-  background: #eee;
-  border: 1px solid #ccc;
-  color: #333;
+.help-icon::after {
+  content: none !important;
 }
-
