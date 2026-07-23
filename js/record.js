@@ -258,7 +258,6 @@ export function initRecord(settings) {
 
     renderLogList();
     analyzeToday(logs, settings, recordDate.value);
-    updateDashboard(logs, settings, recordDate.value);
 
     renderDailyLog(recordDate.value);
 
