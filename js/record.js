@@ -11,7 +11,9 @@ function renderDailyLog(date) {
   }
 
   box.innerHTML = logs.map(l =>
-    `<div>${l.spot}：${l.finalDrink.toFixed(1)}ml</div>`
+    `<div>${l.spot}：${l.finalDrink.toFixed(1)}ml</div>
+     <div>室温：${l.roomTemp ?? "-"}℃</div>
+     <div>水温：${l.waterTemp ?? "-"}℃</div>`
   ).join("");
 }
 
@@ -47,7 +49,8 @@ export function initRecord(settings) {
     logs.forEach((entry, index) => {
       const div = document.createElement("div");
       div.textContent =
-        `${entry.date} / ${entry.cat} / ${entry.spot}：${entry.finalDrink.toFixed(1)}ml`;
+        `${entry.date} / ${entry.cat} / ${entry.spot}：${entry.finalDrink.toFixed(1)}ml
+         / 室温:${entry.roomTemp ?? "-"}℃ / 水温:${entry.waterTemp ?? "-"}℃`;
 
       const editBtn = document.createElement("button");
       editBtn.textContent = "編集";
