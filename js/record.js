@@ -20,6 +20,8 @@ function renderDailyLog(date) {
 export function initRecord(settings) {
   const recordDate = document.getElementById("recordDate");
 
+  recordDate.value = new Date().toISOString().slice(0, 10);
+
   const catSelect = document.getElementById("catSelect");
   const spotSelect = document.getElementById("spotSelect");
 
@@ -141,9 +143,11 @@ export function initRecord(settings) {
     if (spot.method === "weight") {
       measureWeightBlock.style.display = "block";
       measureVolumeBlock.style.display = "none";
+      weightInput.placeholder = `初期量: ${spot.init}g`;
     } else {
       measureWeightBlock.style.display = "none";
       measureVolumeBlock.style.display = "block";
+      volumeInput.placeholder = `初期量: ${spot.init}ml`;
     }
 
     evapInput.value = spot.evap;
